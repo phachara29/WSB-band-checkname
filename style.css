@@ -8,9 +8,6 @@ table {
 }
 table, th, tr, td{
     border: 2px solid black;
-    max-width: 90%;
-    width: 200px;
-    height: 100px;
     margin-top: 7%;
 }
 .monday {
