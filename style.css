@@ -6,8 +6,8 @@ h1 {
 table, th, tr, td{
     border: 2px solid black;
     max-width: 90%;
-    width: 100px;
-    height: 150px;
+    width: 200px;
+    height: 100px;
     margin-top: 7%;
 }
 .monday {
