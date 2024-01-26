@@ -3,6 +3,9 @@ h1 {
     margin-top: 5%;
     font-size: 35px;
 }
+table {
+    table-layout: fixed;
+}
 table, th, tr, td{
     border: 2px solid black;
     max-width: 90%;
