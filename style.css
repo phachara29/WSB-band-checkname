@@ -1,38 +1,17 @@
-table {
-    table-layout: fixed;
-    margin-top: 150px;
+body {
+    background-color: rgb(56, 141, 197);
 }
 
-th {
-    background-color: rgb(58, 118, 197);
-}
-
-table, th, tr, td {
+.box {
     border: 2px solid black;
-}
-
-td, .link, a {
-    text-decoration: none;
-    color: black;
-    text-align: center;
+    padding: 20px;
     background-color: gray;
 }
 
-.monday {
-    background-color: yellow;
-}
-
-.tuesday {
-    background-color: pink;
-}
-
-.wednesday {
-    background-color: green;
-}
-
-.thursday {
-    background-color: orange;
-}
-.friday {
-    background-color: rgba(0, 200, 255, 0.901);
+.box, a{
+    text-align: center;
+    margin-top: 80%;
+    font-size: 50px;
+    text-decoration: none;
+    color: black;
 }
