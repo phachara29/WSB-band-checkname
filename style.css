@@ -1,17 +1,35 @@
 body {
-    background-color: rgb(56, 141, 197);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    flex-direction: column;
 }
 
-.box {
-    border: 2px solid black;
-    padding: 20px;
-    background-color: gray;
+.edu, .room {
+    font-size: 20px;
+    padding: 30px;
+    margin-bottom: 45px;
+    margin-top: 233px;
 }
 
-.box, a{
-    text-align: center;
-    margin-top: 80%;
-    font-size: 50px;
-    text-decoration: none;
-    color: black;
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-container button {
+    font-size: 18px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.select-container {
+    display: flex;
+}
+
+.edu, .room {
+    margin-right: 10px;
 }
