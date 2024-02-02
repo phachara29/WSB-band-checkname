@@ -1,14 +1,46 @@
 // script.js
 
-function redirectToPage() {
-  // Define the coordinates of the specified location
-  var specifiedCoordinates = { lat: 10.454149626221884, lng: 99.23227214888827 };
+function calculateDistance(coord1, coord2) {
+  var R = 6371; // Radius of the Earth in kilometers
+  var dLat = deg2rad(coord2.lat - coord1.lat);
+  var dLng = deg2rad(coord2.lng - coord1.lng);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(coord1.lat)) * Math.cos(deg2rad(coord2.lat)) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var distance = R * c; // Distance in kilometers
+  return distance;
+}
 
-  // Get the current coordinates of the user (assuming you have a function to retrieve it)
-  var userCoordinates = getCurrentCoordinates(); // Replace this with your actual function
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+
+function getCurrentCoordinates() {
+  // Example: Replace this with your actual implementation to get user's coordinates
+  // For testing purposes, return a fixed set of coordinates
+  return { lat: 10.5, lng: 99.2 };
+}
+
+function isNearby(userCoordinates, specifiedCoordinates, radius) {
+  var distance = calculateDistance(userCoordinates, specifiedCoordinates);
+  return distance <= radius;
+}
+
+function redirectToPage() {
+  // Get the selected values
+  var selectedClass = document.getElementById('edu').value;
+  var selectedRoom = document.getElementById('room').value;
+
+  // Define the coordinates of the specified location
+  var specifiedCoordinates = { lat: 10.454143429867239, lng: 99.23227715846424 };
+
+  // Get the current coordinates of the user
+  var userCoordinates = getCurrentCoordinates();
 
   // Check if the user is near the specified location with a radius of 100 meters
-  if (isNearby(userCoordinates, specifiedCoordinates, 100)) {
+  if (isNearby(userCoordinates, specifiedCoordinates, 0.1)) {
     // Define URLs for each option
     var urlMap = {
       'ม.1': {
@@ -21,7 +53,7 @@ function redirectToPage() {
       'ม.2': {
         'ห้อง1': 'https://docs.google.com/forms/d/e/1FAIpQLSdwJBZEngB3p8JEuW4AfpOVgmMVzN1nmrg8AA_73Br0Fcl0ow/viewform',
         'ห้อง2': 'https://docs.google.com/forms/d/e/1FAIpQLSeGph3Kcx9QSdbJRDmxwvuc5EYfdNry9Fgw4yJaw-vjnUW7KA/viewform',
-        'ห้อง3': 'https://docs.google.com/forms/d/e/1FAIpQLSfrh3yQeDVifOXIsSXCdpOm2F1PJe_B1djNuAz-T97kE3BD_g/viewform',
+        'ห้อง3': 'https://docs.google.com/forms/d/e/1FAIpQLSfrh3yQeDVifOXIsWXCdpOm2F1PJe_B1djNuAz-T97kE3BD_g/viewform',
         'ห้อง4': 'https://docs.google.com/forms/d/e/1FAIpQLSfSTOptPasPE_HF1iRhMcLw2TtSgdcsWqzT8DgcdcDDlyj_Hw/viewform',
         'ห้อง5': 'https://docs.google.com/forms/d/e/1FAIpQLSeACnQR2vd8SqXvf7wLVYo2Aw1luw6SDGFCzwyTLaOf6UhbfA/viewform'
       },
@@ -55,32 +87,13 @@ function redirectToPage() {
     if (selectedUrl) {
       window.location.href = selectedUrl;
     } else {
-      // Use specified coordinates (10.454149626221884, 99.23227214888827) if no URL is found
+      // Use specified coordinates if no URL is found
       var specifiedCoordinatesUrl = 'https://www.google.com/maps/@10.454149626221884,99.23227214888827,214m/data=!3m1!1e3?entry=ttu';
       window.location.href = specifiedCoordinatesUrl;
     }
   } else {
     alert('คุณต้องอยู่ในพื้นที่ใกล้เคียงเพื่อทำการส่งข้อมูล');
   }
-}
-
-function getCurrentCoordinates() {
-  // Example: return { lat: 10.5, lng: 99.2 };
-  // Replace with actual implementation
-  return { lat: 0, lng: 0 };
-}
-
-function isNearby(userCoordinates, specifiedCoordinates, radius) {
-  // Example: check if the user is within the specified radius of the specified location
-  // Replace with actual implementation
-  var distance = calculateDistance(userCoordinates, specifiedCoordinates);
-  return distance <= radius;
-}
-
-function calculateDistance(coord1, coord2) {
-  // Example: calculate the distance between two coordinates
-  // Replace with actual implementation (e.g., Haversine formula)
-  return 0;
 }
 
 function handleButtonClick() {
