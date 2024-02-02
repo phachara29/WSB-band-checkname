@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>เช็คชื่อวงโยธวาธิตWSB</title>
-</head>
-<body>
-    <div class="img-container">
-        <img src="23.jpg" alt="">
-    </div>
-    <span class="header">
-    <h1>เลือกชั้นเเละห้องเรียนเพื่อกดส่งข้อมูล</h1>
-    </span>
-    <div class="select-container">
-        <label for="edu"></label>
-        <select name="edu" id="edu" class="edu">
-            <option value="ม.1">ม.1</option>
-            <option value="ม.2">ม.2</option>
-            <option value="ม.3">ม.3</option>
-            <option value="ม.4">ม.4</option>
-            <option value="ม.5">ม.5</option>
-            <option value="ม.6">ม.6</option>
-            <!-- Add more class options as needed -->
-        </select>
-
-        <label for="room"></label>
-        <select name="room" id="room" class="room">
-            <option value="ห้อง1">ห้อง1</option>
-            <option value="ห้อง2">ห้อง2</option>
-            <option value="ห้อง3">ห้อง3</option>
-            <option value="ห้อง4">ห้อง4</option>
-            <option value="ห้อง5">ห้อง5</option>
-            <!-- Add more room options as needed -->
-        </select>
-    </div>
-
-    <div class="button-container">
-        <button onclick="handleButtonClick()">ส่งข้อมูล</button>
-    </div>
-    <script>
+<script>
         function redirectToPage() {
             // Get the selected values
             var selectedClass = document.getElementById('edu').value;
@@ -72,11 +30,11 @@
                 lng: 99.1758955876918
             };
 
-            if (isNearby(userCoordinates, specifiedCoordinates)) {
+            if (isNearby(userCoordinates, specifiedCoordinates, 20)) {
                 // Redirect to the selected URL
                 redirectToSelectedPage();
             } else {
-                alert('คุณต้องอยู่ในพื้นที่ใกล้เคียงเพื่อทำการส่งข้อมูล');
+                alert('คุณต้องอยู่ในพื้นที่ห้องวงโยหรือใกล้เคียงภายในระยะ 20 เมตรเพื่อทำการส่งข้อมูล');
             }
         }
 
@@ -84,13 +42,31 @@
             console.log('Error getting user coordinates:', error);
         }
 
-        function isNearby(userCoordinates, specifiedCoordinates) {
-            // Example: Check if the user is within a certain radius of the specified location
-            var radius = 0.1; // Adjust the radius as needed
-            var latDiff = Math.abs(userCoordinates.lat - specifiedCoordinates.lat);
-            var lngDiff = Math.abs(userCoordinates.lng - specifiedCoordinates.lng);
+        function isNearby(userCoordinates, specifiedCoordinates, radius) {
+            // Calculate the distance between two coordinates
+            var distance = getDistance(userCoordinates, specifiedCoordinates);
 
-            return latDiff < radius && lngDiff < radius;
+            return distance <= radius;
+        }
+
+        function getDistance(coord1, coord2) {
+            var R = 6371; // Earth's radius in kilometers
+            var dLat = degToRad(coord2.lat - coord1.lat);
+            var dLng = degToRad(coord2.lng - coord1.lng);
+
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(degToRad(coord1.lat)) * Math.cos(degToRad(coord2.lat)) *
+                    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            var distance = R * c; // Distance in kilometers
+
+            return distance * 1000; // Convert to meters
+        }
+
+        function degToRad(degrees) {
+            return degrees * (Math.PI / 180);
         }
 
         function redirectToSelectedPage() {
@@ -102,5 +78,3 @@
             redirectToPage();
         }
     </script>
-</body>
-</html>
