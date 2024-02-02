@@ -1,4 +1,46 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="img-container">
+        <img src="23.jpg" alt="">
+    </div>
+    <span class="header">
+    <h1>เลือกชั้นเเละห้องเรียนเพื่อกดส่งข้อมูล</h1>
+    </span>
+    <div class="select-container">
+        <label for="edu"></label>
+        <select name="edu" id="edu" class="edu">
+            <option value="ม.1">ม.1</option>
+            <option value="ม.2">ม.2</option>
+            <option value="ม.3">ม.3</option>
+            <option value="ม.4">ม.4</option>
+            <option value="ม.5">ม.5</option>
+            <option value="ม.6">ม.6</option>
+            <!-- Add more class options as needed -->
+        </select>
+
+        <label for="room"></label>
+        <select name="room" id="room" class="room">
+            <option value="ห้อง1">ห้อง1</option>
+            <option value="ห้อง2">ห้อง2</option>
+            <option value="ห้อง3">ห้อง3</option>
+            <option value="ห้อง4">ห้อง4</option>
+            <option value="ห้อง5">ห้อง5</option>
+            <!-- Add more room options as needed -->
+        </select>
+    </div>
+
+    <div class="button-container">
+        <button onclick="handleButtonClick()">ส่งข้อมูล</button>
+    </div>
+        <script>
         function redirectToPage() {
             // Get the selected values
             var selectedClass = document.getElementById('edu').value;
@@ -78,3 +120,5 @@
             redirectToPage();
         }
     </script>
+</body>
+</html>
