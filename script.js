@@ -57,8 +57,8 @@ function redirectToPage() {
     if (selectedUrl) {
       window.location.href = selectedUrl;
     } else {
-      // Use specified coordinates (10.490891430424066, 99.1758955876918) if no URL is found
-      var specifiedCoordinatesUrl = 'https://maps.google.com/maps?q=10.490891430424066,99.1758955876918';
+      // Use specified coordinates (10.4538331, 99.2317954) if no URL is found
+      var specifiedCoordinatesUrl = 'https://www.google.com/maps/@10.4538331,99.2317954,214m/data=!3m1!1e3?entry=ttu';
       window.location.href = specifiedCoordinatesUrl;
     }
   } else {
