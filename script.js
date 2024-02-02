@@ -10,7 +10,7 @@ function redirectToPage() {
   var userCoordinates = getCurrentCoordinates(); // Replace this with your actual function
 
   // Check if the user is near the specified location
-  if (isNearby(userCoordinates, specifiedCoordinates)) {
+  if (isNearby(userCoordinates, specifiedCoordinates, 100)) { // 100 is the radius in meters
     // Define URLs for each option
     var urlMap = {
       'ม.1': {
@@ -36,7 +36,8 @@ function redirectToPage() {
       },
       'ม.4': {
         'ห้อง1': 'https://docs.google.com/forms/d/e/1FAIpQLSeQ0x6pQ-n8Z5IAfaBqif2a7juLMCZuaKIywpPn1m42HFNUpA/viewform',
-        'ห้อง2': 'https://docs.google.com/forms/d/e/1FAIpQLSflpB9HrlQyt1TFsV5XAIRNI5N4BHCMeMSoj4OXWmuKOMm04Q/viewform',
+        'ห้อง2': 'https://docs.google.com/forms/d/e/1FAIpQLSflpB9HrlQyt1TFsV5XAIRNI5N4BHCMeMSoj4OXWmu
+KOMm04Q/viewform',
         'ห้อง3': 'https://docs.google.com/forms/d/e/1FAIpQLSe2gLp1eXE85khEf0qSixqT_i5kgodSK9KbLj9-jyC8k40rvQ/viewform',
       },
       'ม.5': {
@@ -74,9 +75,8 @@ function getCurrentCoordinates() {
 }
 
 // Replace this function with your actual function to check if the user is nearby
-function isNearby(userCoordinates, specifiedCoordinates) {
+function isNearby(userCoordinates, specifiedCoordinates, radius) {
   // Example: return true if the user is within a certain radius of the specified location
-  var radius = 20; // Radius in meters
   var earthRadius = 6371000; // Earth radius in meters
 
   var lat1 = deg2rad(userCoordinates.lat);
@@ -90,7 +90,6 @@ function isNearby(userCoordinates, specifiedCoordinates) {
   var a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
   var distance = earthRadius * c;
