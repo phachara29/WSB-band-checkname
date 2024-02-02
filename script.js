@@ -77,7 +77,27 @@ function getCurrentCoordinates() {
 function isNearby(userCoordinates, specifiedCoordinates) {
   // Example: return true if the user is within a certain radius of the specified location
   // Replace with actual implementation
-  return true;
+  var distance = calculateDistance(userCoordinates, specifiedCoordinates);
+  return distance <= 20; // Assuming the distance is in meters
+}
+
+function calculateDistance(coord1, coord2) {
+  // Example: calculate the distance between two coordinates (Haversine formula)
+  // Replace with actual implementation
+  var R = 6371000; // Earth's radius in meters
+  var lat1 = (Math.PI / 180) * coord1.lat;
+  var lat2 = (Math.PI / 180) * coord2.lat;
+  var deltaLat = (Math.PI / 180) * (coord2.lat - coord1.lat);
+  var deltaLng = (Math.PI / 180) * (coord2.lng - coord1.lng);
+
+  var a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+    Math.cos(lat1) * Math.cos(lat2) *
+    Math.sin(deltaLng / 2) * Math.sin(deltaLng / 2);
+
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  var distance = R * c;
+  return distance;
 }
 
 function handleButtonClick() {
