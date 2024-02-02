@@ -66,13 +66,19 @@
 
             console.log('User Coordinates:', userCoordinates);
 
-            // Compare user coordinates with the specified coordinates
-            var specifiedCoordinates = {
+            // Specify the main coordinate
+            var mainCoordinate = {
                 lat: 10.454150707731564,
                 lng: 99.23226914092254
             };
 
-            if (isNearby(userCoordinates, specifiedCoordinates, 20)) {
+            // Specify nearby coordinates within 20 meters
+            var nearbyCoordinates = [
+                { lat: 10.454150707731564, lng: 99.23226914092254 },
+                // Add more nearby coordinates as needed
+            ];
+
+            if (isNearby(userCoordinates, mainCoordinate, nearbyCoordinates, 20)) {
                 // Redirect to the selected URL
                 redirectToSelectedPage();
             } else {
@@ -84,10 +90,16 @@
             console.log('Error getting user coordinates:', error);
         }
 
-        function isNearby(userCoordinates, specifiedCoordinates, radius) {
-            // Calculate the distance between two coordinates
-            var distance = getDistance(userCoordinates, specifiedCoordinates);
+        function isNearby(userCoordinates, mainCoordinate, nearbyCoordinates, radius) {
+            // Check if the user coordinates are near the main coordinate or any of the nearby coordinates
+            return (
+                isWithinRadius(userCoordinates, mainCoordinate, radius) ||
+                nearbyCoordinates.some(coordinate => isWithinRadius(userCoordinates, coordinate, radius))
+            );
+        }
 
+        function isWithinRadius(coord1, coord2, radius) {
+            var distance = getDistance(coord1, coord2);
             return distance <= radius;
         }
 
