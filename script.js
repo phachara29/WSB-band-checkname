@@ -52,7 +52,34 @@ function redirectToPage() {
       // Add more options as needed
     };
 
+    // Redirect to the selected URL
+    var selectedUrl = urlMap[selectedClass]?.[selectedRoom];
+    if (selectedUrl) {
+      window.location.href = selectedUrl;
+    } else {
+      // Use specified coordinates (10.490891430424066, 99.1758955876918) if no URL is found
+      var specifiedCoordinatesUrl = 'https://maps.google.com/maps?q=10.490891430424066,99.1758955876918';
+      window.location.href = specifiedCoordinatesUrl;
+    }
+  } else {
+    alert('คุณต้องอยู่ในพื้นที่ใกล้เคียงเพื่อทำการส่งข้อมูล');
+  }
+}
+
+// Replace this function with your actual function to get the user's current coordinates
+function getCurrentCoordinates() {
+  // Example: return { lat: 10.5, lng: 99.2 };
+  // Replace with actual implementation
+  return { lat: 0, lng: 0 };
+}
+
+// Replace this function with your actual function to check if the user is nearby
+function isNearby(userCoordinates, specifiedCoordinates) {
+  // Example: return true if the user is within a certain radius of the specified location
+  // Replace with actual implementation
+  return true;
+}
+
 function handleButtonClick() {
   redirectToPage();
 }
-
