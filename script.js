@@ -3,8 +3,8 @@ function redirectToPage() {
   var selectedClass = document.getElementById('edu').value;
   var selectedRoom = document.getElementById('room').value;
 
-  // Define the coordinates of the specified location
-  var specifiedCoordinates = { lat: 10.454143429867239, lng: 99.23227715846424 };
+// Define the coordinates of the specified location
+var specifiedCoordinates = { lat: 10.454143429867239, lng: 99.23227715846424 };
 
   // Get the current coordinates of the user (assuming you have a function to retrieve it)
   var userCoordinates = getCurrentCoordinates(); // Replace this with your actual function
