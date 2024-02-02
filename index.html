@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Document</title>
-</head>
-<body>
-    <div class="img-container">
-        <img src="23.jpg" alt="">
-    </div>
-    <span class="header">
-    <h1>เลือกชั้นเเละห้องเรียนเพื่อกดส่งข้อมูล</h1>
-    </span>
-    <div class="select-container">
-        <label for="edu"></label>
-        <select name="edu" id="edu" class="edu">
-            <option value="ม.1">ม.1</option>
-            <option value="ม.2">ม.2</option>
-            <option value="ม.3">ม.3</option>
-            <option value="ม.4">ม.4</option>
-            <option value="ม.5">ม.5</option>
-            <option value="ม.6">ม.6</option>
-            <!-- Add more class options as needed -->
-        </select>
-
-        <label for="room"></label>
-        <select name="room" id="room" class="room">
-            <option value="ห้อง1">ห้อง1</option>
-            <option value="ห้อง2">ห้อง2</option>
-            <option value="ห้อง3">ห้อง3</option>
-            <option value="ห้อง4">ห้อง4</option>
-            <option value="ห้อง5">ห้อง5</option>
-            <!-- Add more room options as needed -->
-        </select>
-    </div>
-
-    <div class="button-container">
-        <button onclick="handleButtonClick()">ส่งข้อมูล</button>
-    </div>
-    <script>
+<script>
         function redirectToPage() {
             // Get the selected values
             var selectedClass = document.getElementById('edu').value;
@@ -66,23 +24,20 @@
 
             console.log('User Coordinates:', userCoordinates);
 
-            // Specify the main coordinate
-            var mainCoordinate = {
-                lat: 10.454150707731564,
-                lng: 99.23226914092254
-            };
-
-            // Specify nearby coordinates within 20 meters
-            var nearbyCoordinates = [
-                { lat: 10.454150707731564, lng: 99.23226914092254 },
-                // Add more nearby coordinates as needed
+            // Specify the coordinates of the polygon
+            var polygonCoordinates = [
+                { lat: 10.454141403263009, lng: 99.23220363804575 },
+                { lat: 10.454176473954679, lng: 99.23220509366526 },
+                { lat: 10.454197945804768, lng: 99.2322909752164 },
+                { lat: 10.454131383064668, lng: 99.23230480360174 }
+                // Add more coordinates as needed
             ];
 
-            if (isNearby(userCoordinates, mainCoordinate, nearbyCoordinates, 20)) {
+            if (isInsidePolygon(userCoordinates, polygonCoordinates)) {
                 // Redirect to the selected URL
                 redirectToSelectedPage();
             } else {
-                alert('คุณต้องอยู่ในพื้นที่ห้องวงโยหรือใกล้เคียงภายในระยะ 20 เมตรเพื่อทำการส่งข้อมูล');
+                alert('คุณต้องอยู่ในพื้นที่ระหว่างพิกัดที่ระบุเพื่อทำการส่งข้อมูล');
             }
         }
 
@@ -90,37 +45,20 @@
             console.log('Error getting user coordinates:', error);
         }
 
-        function isNearby(userCoordinates, mainCoordinate, nearbyCoordinates, radius) {
-            // Check if the user coordinates are near the main coordinate or any of the nearby coordinates
-            return (
-                isWithinRadius(userCoordinates, mainCoordinate, radius) ||
-                nearbyCoordinates.some(coordinate => isWithinRadius(userCoordinates, coordinate, radius))
-            );
-        }
+        function isInsidePolygon(point, polygon) {
+            var isInside = false;
 
-        function isWithinRadius(coord1, coord2, radius) {
-            var distance = getDistance(coord1, coord2);
-            return distance <= radius;
-        }
+            for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+                var xi = polygon[i].lat, yi = polygon[i].lng;
+                var xj = polygon[j].lat, yj = polygon[j].lng;
 
-        function getDistance(coord1, coord2) {
-            var R = 6371; // Earth's radius in kilometers
-            var dLat = degToRad(coord2.lat - coord1.lat);
-            var dLng = degToRad(coord2.lng - coord1.lng);
+                var intersect = ((yi > point.lng) != (yj > point.lng)) &&
+                    (point.lat < (xj - xi) * (point.lng - xi) / (yj - yi) + xi);
 
-            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                    Math.cos(degToRad(coord1.lat)) * Math.cos(degToRad(coord2.lat)) *
-                    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+                if (intersect) isInside = !isInside;
+            }
 
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-            var distance = R * c; // Distance in kilometers
-
-            return distance * 1000; // Convert to meters
-        }
-
-        function degToRad(degrees) {
-            return degrees * (Math.PI / 180);
+            return isInside;
         }
 
         function redirectToSelectedPage() {
@@ -132,5 +70,3 @@
             redirectToPage();
         }
     </script>
-</body>
-</html>
