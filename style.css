@@ -13,7 +13,7 @@ body {
     max-width: 100%;
     overflow: hidden;
     width: 100%;
-    margin-top: -150px;
+    margin-top: -20px;
 }
 
 .img-container img {
@@ -26,8 +26,8 @@ body {
 .header {
     border: 3px solid blue;
     font-size: 7px;
-    margin-top: 23px;
-    margin-bottom: -36px;
+    margin-top: 50px;
+    margin-bottom: -5px;
     padding: 10px;
     background-color: rgb(128, 128, 137);
 }
@@ -59,4 +59,11 @@ body {
 .edu, .room {
     margin-right: 10px;
     border: solid blue;
+}
+
+a {
+    text-decoration: none;
+    margin-top: 130px;
+    color: black;
+    font-size: 15px;
 }
