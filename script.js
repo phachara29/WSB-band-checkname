@@ -5,8 +5,8 @@ function handleButtonClick() {var targetLatitude = 10.454151078680168;
   var selectedRoom = document.getElementById("room").value;
 
   // ตรวจสอบว่าอยู่ในพิกัดที่กำหนดหรือไม่
-  var userLatitude = 10.454150542033535;
-  var userLongitude = 99.23227983513722;
+  var userLatitude = 10.490934700770444;
+  var userLongitude = 99.17583935691049;
   var targetLatitude = 10.454151078680168;
   var targetLongitude = 99.23227978109529;
   var maxDistance = 10;
