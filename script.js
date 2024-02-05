@@ -7,8 +7,8 @@ function handleButtonClick() {var targetLatitude = 10.454151078680168;
   // ตรวจสอบว่าอยู่ในพิกัดที่กำหนดหรือไม่
   var userLatitude = 10.490934700770444;
   var userLongitude = 99.17583935691049;
-  var targetLatitude = 10.490867;
-  var targetLongitude = 99.175785;
+  var targetLatitude = 10.490934700770444;
+  var targetLongitude = 99.17583935691049;
   var maxDistance = 10;
 
 
