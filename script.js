@@ -1,39 +1,3 @@
-// Function to calculate distance between two coordinates using Haversine formula
-function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Earth's radius in kilometers
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in kilometers
-
-    return distance;
-}
-
-// Function to convert degrees to radians
-function toRad(degrees) {
-    return (degrees * Math.PI) / 180;
-}
-
-// Function to get current location using Geolocation API
-function getCurrentLocation(callback) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function (position) {
-                var userLatitude = position.coords.latitude;
-                var userLongitude = position.coords.longitude;
-                callback(userLatitude, userLongitude);
-            },
-            function (error) {
-                console.error("Error getting user's location:", error.message);
-            }
-        );
-    } else {
-        console.error("Geolocation is not supported by this browser");
-    }
-}
-
 // handleButtonClick function
 function handleButtonClick() {
     var selectedEdu = document.getElementById("edu").value;
@@ -67,12 +31,14 @@ function handleButtonClick() {
                 // Open the Google Form
                 window.location.href = openFormUrl;
             } else {
-                // Display an alert window
-                alert("No URL found for the selected education and room");
+                // Display a message on the website
+                var messageElement = document.getElementById("message");
+                messageElement.innerText = "No URL found for the selected education and room";
             }
         } else {
-            // Display alert if the user is not within the specified distance
-            alert("คุณต้องอยู่ในระยะ 10 เมตรของตำแหน่งที่กำหนด");
+            // Display a message on the website
+            var messageElement = document.getElementById("message");
+            messageElement.innerText = "คุณต้องอยู่ในระยะ 10 เมตรของตำแหน่งที่กำหนด";
         }
     });
 }
