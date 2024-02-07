@@ -41,6 +41,7 @@ function getCurrentLocation(callback) {
 
 // handleButtonClick function
 function handleButtonClick() {
+    // Get the selected education and room
     var selectedEdu = document.getElementById("edu").value;
     var selectedRoom = document.getElementById("room").value;
     var maxDistance = 10;
@@ -50,11 +51,11 @@ function handleButtonClick() {
 
     // Get current location of the user
     getCurrentLocation(function (userLatitude, userLongitude) {
-        // Log user's location to the console
-        console.log("User's Location:", userLatitude, userLongitude);
-
         // Calculate distance
         var distance = calculateDistance(userLatitude, userLongitude, targetLatitude, targetLongitude);
+
+        // Display a message on the website
+        var messageElement = document.getElementById("message");
 
         // Check if the user is within the specified distance
         if (distance <= maxDistance) {
@@ -69,26 +70,25 @@ function handleButtonClick() {
 
             // Check if formUrl is not undefined
             if (formUrl !== undefined) {
-                // Log the URL to the console
-                console.log("Google Form URL:", formUrl);
-
                 // Create the URL to open the Google Form
                 var openFormUrl = formUrl + "?entry.1234567890=" + selectedEdu + "&entry.0987654321=" + selectedRoom;
-
-                // Log the URL to the console
-                console.log("Open Form URL:", openFormUrl);
 
                 // Open the Google Form
                 window.location.href = openFormUrl;
             } else {
                 // Display a message on the website
-                var messageElement = document.getElementById("message");
                 messageElement.innerText = "ไม่พบ URL สำหรับชั้นเรียนและห้องที่เลือก";
             }
         } else {
-            // Display an alert on the website
-            var messageElement = document.getElementById("message");
+            // Display a message on the website
             messageElement.innerText = "คุณต้องอยู่ในระยะ 10 เมตรของตำแหน่งที่กำหนด";
+
+            // Optionally, you can add more logic here to handle the message as needed
         }
+
+        // Set a timeout to clear the message after 5 seconds
+        setTimeout(function () {
+            messageElement.innerText = "";
+        }, 5000);
     });
 }
