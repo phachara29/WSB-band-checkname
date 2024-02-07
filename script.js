@@ -39,7 +39,6 @@ function getCurrentLocation(callback) {
     }
 }
 
-
 // handleButtonClick function
 function handleButtonClick() {
     var selectedEdu = document.getElementById("edu").value;
@@ -51,6 +50,9 @@ function handleButtonClick() {
 
     // Get current location of the user
     getCurrentLocation(function (userLatitude, userLongitude) {
+        // Log user's location to the console
+        console.log("User's Location:", userLatitude, userLongitude);
+
         // Calculate distance
         var distance = calculateDistance(userLatitude, userLongitude, targetLatitude, targetLongitude);
 
@@ -67,8 +69,14 @@ function handleButtonClick() {
 
             // Check if formUrl is not undefined
             if (formUrl !== undefined) {
+                // Log the URL to the console
+                console.log("Google Form URL:", formUrl);
+
                 // Create the URL to open the Google Form
                 var openFormUrl = formUrl + "?entry.1234567890=" + selectedEdu + "&entry.0987654321=" + selectedRoom;
+
+                // Log the URL to the console
+                console.log("Open Form URL:", openFormUrl);
 
                 // Open the Google Form
                 window.location.href = openFormUrl;
