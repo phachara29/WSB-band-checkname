@@ -23,6 +23,11 @@ function getCurrentLocation(callback) {
             function (position) {
                 var userLatitude = position.coords.latitude;
                 var userLongitude = position.coords.longitude;
+
+                // Log the user's location to the console
+                console.log("User's Location:", userLatitude, userLongitude);
+
+                // Call the callback function with the user's location
                 callback(userLatitude, userLongitude);
             },
             function (error) {
@@ -33,6 +38,7 @@ function getCurrentLocation(callback) {
         console.error("Geolocation is not supported by this browser");
     }
 }
+
 
 // handleButtonClick function
 function handleButtonClick() {
