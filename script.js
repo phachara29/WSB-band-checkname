@@ -1,5 +1,5 @@
-function handleButtonClick() {var targetLatitude = 10.454151078680168;
-    // var targetLongitude = 99.23227978109529;
+function handleButtonClick() {var targetLatitude = 10.490938653703237;
+    var targetLongitude = 99.17584663032137;
     // ดึงค่าที่เลือกจากเลือกชั้น (edu) และห้อง (room)
     var selectedEdu = document.getElementById("edu").value;
     var selectedRoom = document.getElementById("room").value;
